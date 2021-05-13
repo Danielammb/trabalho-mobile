@@ -3,12 +3,19 @@ import { View, Button, Text } from 'react-native';
 
 const Inicial = ({ navigation }) => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Inicial ;D</Text>
+    <Text style={styles.title}>JOGO DA VELHA</Text>
     <Button 
-      title="Ir para escolha cor"
-      onPress={() => navigation.navigate('Escolha cor') }
+      title="INICIAR JOGO"
+      onPress={() => navigation.navigate('EscolhaCor') }
     />
   </View>
 );
 
 export default Inicial;
+
+const styles = StyleSheet.create({
+  title: {
+    flex: 1,
+    fontSize: 48,
+  },
+});
