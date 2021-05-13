@@ -1,16 +1,22 @@
 import React from 'react';
-import { View, Button, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const EscolhaCor = ({ navigation }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Jogador 01, escolha sua cor:</Text>
-    
-    <TouchableOpacity style={styles.firstButton} onPress={() => navigation.navigate('Tabuleiro') }>
+  <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
+    <Text style={styles.title}>Jogador 01, escolha sua cor:</Text>
+    <View style={styles.container}>
+    <TouchableOpacity
+     style={styles.firstButton}
+      onPress={() => navigation.navigate('Tabuleiro', { marcaJogador01: 'X'}) }>
     <Text style={styles.x}>X</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.firstButton} onPress={() => navigation.navigate('Tabuleiro') }>
-      <View />
+    <TouchableOpacity
+     style={styles.secondButton}
+      onPress={() => navigation.navigate('Tabuleiro', { marcaJogador01: 'O'}) }>
+      <View style={styles.circle}/>
     </TouchableOpacity>
+    </View>
+    
   </View>
 );
 
@@ -18,18 +24,45 @@ export default EscolhaCor;
 
 const styles = StyleSheet.create({
   firstButton: {
-    backgrounColor: '#7429D4',
+    backgroundColor: '#7429D4',
+    width: 72,
+    height: 61,
+    justifyContent: 'center',
+     alignItems: 'center'
   },
   secondButton: {
-    backgrounColor: '#2997D4',
+    backgroundColor: '#2997D4',
+    width: 72,
+    height: 61,
+    justifyContent: 'center',
+     alignItems: 'center'
   },
   circle: {
-    borderRadius: 50,
-    width: 48,
-    height: 48,
+    width: 44,
+    height: 44,
+    backgroundColor: '#C4C4C4',
+    borderRadius: 25,
   },
   x: {
     width: 48,
     height: 48,
+    color: '#C4C4C4',
+    fontWeight: 'bold',
+    fontSize: 40,
+    marginTop: -15,
+    textAlign: 'center'
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    marginTop: 40,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '400',
+    color: '#000000',
+    marginTop: 90,
   },
 });
