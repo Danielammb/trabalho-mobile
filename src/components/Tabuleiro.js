@@ -1,14 +1,13 @@
 import React, { useState} from 'react';
-import { View, Button, Text, StyleSheet  } from 'react-native';
-import utils from './utils';
-import Box from '../components/Box';
+import { View, Text, StyleSheet  } from 'react-native';
+import utils from '../utils';
+import Box from './Box';
 
-const Tabuleiro = ({ route, navigation }) => {
-  const [disponiveis, setDisponiveis] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
+const Tabuleiro = ({ marcaJogador01, vez, handleMostrarResultado }) => {
+  const [disponiveis, setDisponiveis] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const [marcadosPorJog1, setMarcadosPorJog1] = useState([]);
   const [marcadosPorJog2, setMarcadosPorJog2] = useState([]);
   const [jogadorAtual, setNovoJogador] = useState(1);
-  const { marcaJogador01 } = route.params;
   const marcaJogador02 = marcaJogador01 === 'X'? 'O' : 'X';
   const corJog01 = marcaJogador01 === 'X'? '#7429D4' : '#2997D4';
   const corJog02 = marcaJogador02 === 'X'? '#7429D4' : '#2997D4';
@@ -16,10 +15,10 @@ const Tabuleiro = ({ route, navigation }) => {
   const avaliaMarcadosPorJog= (marcadosJogador) => {
     const marcouPonto = utils.logicaJogoDaVelha(marcadosJogador);
      if(marcouPonto && jogadorAtual === 1){
-       navigation.navigate('Resultado', { empate: false, vencedor: 1, cor: corJog01 });
+        handleMostrarResultado({ empate: false, vencedor: 1, cor: corJog01});
      }else
      if(marcouPonto && jogadorAtual === 2){
-      navigation.navigate('Resultado', { empate: false, vencedor: 2, cor: corJog02 });
+        handleMostrarResultado({ empate: false, vencedor: 2, cor: corJog02});
      }
 
 };
@@ -45,8 +44,9 @@ const Tabuleiro = ({ route, navigation }) => {
      }
      
      const novoDisponiveis = disponiveis.filter((id) => id !== idQuadrado);
+
      if(novoDisponiveis.length === 0){
-       navigation.navigate('Resultado', { empate: true, vencedor: 0 });
+        handleMostrarResultado({ empate: true, vencedor: 0, cor: '#000000'});
      }else{
          setDisponiveis(novoDisponiveis);
      }
@@ -55,7 +55,7 @@ const Tabuleiro = ({ route, navigation }) => {
 
   return (
   <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
-    <Text style={styles.title}>Rodada 01</Text>
+    <Text style={styles.title}>Rodada {`0${vez+1}`}</Text>
     <Text style={[styles.subtitle,
        {color: jogadorAtual === 1? corJog01 : corJog02}]}>
         {jogadorAtual === 1? 'Vez do jogador 01' : 'Vez do jogador 02'}
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    width: '80%',
+    width: '100%',
     maxHeight: 280,
   },
   row: {

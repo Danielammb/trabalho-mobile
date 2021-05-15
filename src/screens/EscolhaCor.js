@@ -7,12 +7,12 @@ const EscolhaCor = ({ navigation }) => (
     <View style={styles.container}>
     <TouchableOpacity
      style={styles.firstButton}
-      onPress={() => navigation.navigate('Tabuleiro', { marcaJogador01: 'X'}) }>
+      onPress={() => navigation.navigate('Jogo', { marcaJogador01: 'X'}) }>
     <Text style={styles.x}>X</Text>
     </TouchableOpacity>
     <TouchableOpacity
      style={styles.secondButton}
-      onPress={() => navigation.navigate('Tabuleiro', { marcaJogador01: 'O'}) }>
+      onPress={() => navigation.navigate('Jogo', { marcaJogador01: 'O'}) }>
       <View style={styles.circle}/>
     </TouchableOpacity>
     </View>
